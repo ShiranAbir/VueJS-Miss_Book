@@ -3,7 +3,7 @@ import bookPreview from "../cmps/book-preview.cmp.js"
 export default {
   props: ["books"],
   template: `
- <section class="books-list">
+ <section class="books-list app-main">
         <ul>
             <li v-for="(book,id) in books" :key="book.id">
                 <book-preview :book="book"/>

@@ -1,9 +1,10 @@
 import longText from '../cmps/long-text.cmp.js'
+import { eventBus } from '../services/eventBus-service.js'
 
 export default {
   props: ["book"],
   template: `
-      <section class="book-details">
+      <section class="book-details app-main">
           <button class="close-modal" @click="$emit('close')">Close</button>
           <h1>{{book.title}}</h1>
           <h2>Subtitle:{{book.subtitle}}</h2>
@@ -16,12 +17,17 @@ export default {
           <p>Language: {{book.language}}</p>
           <img :src="bookImgUrl">
           <img v-if="book.listPrice.isOnSale" class="sale" src="img/sale-tag.png">
+          <button @click="callBus">Call the Bus</button>
       </section>
   `,
   data() {
     return {};
   },
   methods: {
+    callBus(){
+      console.log('testing');
+      eventBus.emit('show-msg', { txt: 'Saved/Update successfully', type: 'success' });
+    }
   },
   computed: {
     bookImgUrl() {
@@ -51,5 +57,6 @@ export default {
   },
   components: {
 		longText,
+    eventBus,
 	},
 }
