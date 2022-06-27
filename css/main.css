@@ -52,11 +52,28 @@ li{
 .book-details img{
     position: fixed;
     right: 50px;
-    top: 200px;
-    height: 300px;
+    top: 230px;
+    height: 350px;
 }
 
 .book-details h1{
     text-align: center;
     font-size: 2.5rem;
+}
+
+.book-details .sale{
+    height:100px;
+}
+
+.red{
+    color: red ;
+}
+.green{
+    color: green ;
+}
+
+.close-modal{
+    position: fixed;
+    top:190px;
+    right: 10px;
 }

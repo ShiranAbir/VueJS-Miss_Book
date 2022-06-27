@@ -8,7 +8,7 @@ export default {
   template: `
     <book-filter @filtered="filterBook"></book-filter>
     <book-list v-if="!selectedBook" :books="booksToShow" @selected="selectBook"></book-list>
-    <book-details v-if="selectedBook" :book="selectedBook"></book-details>
+    <book-details v-if="selectedBook" @close="selectedBook = null" :book="selectedBook"></book-details>
 `,
   data() {
     return {
