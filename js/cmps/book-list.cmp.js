@@ -7,7 +7,7 @@ export default {
         <ul>
             <li v-for="(book,id) in books" :key="book.id">
                 <book-preview :book="book"/>
-                <button @click="select(book)">Details</button>
+                <router-link tag="button" :to="'/book/'+book.id"><button>Details</button></router-link>
             </li>
         </ul>
     </section>
@@ -20,10 +20,6 @@ export default {
     return {}
   },
   methods: {
-    select(book){
-      console.log('selected: ',book)
-      this.$emit("selected", book)
-    }
   },
   computed: {},
 }

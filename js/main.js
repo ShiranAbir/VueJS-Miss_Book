@@ -1,8 +1,8 @@
 import bookApp from "./views/book-app.cmp.js"
 import bookHeader from "./cmps/book-header.cmp.js"
-import appFooter from './cmps/app-footer.cmp.js';
-import { router } from './router.js';
-import userMsg from "./cmps/user-msg.cmp.js";
+import appFooter from './cmps/app-footer.cmp.js'
+import { router } from './router.js'
+import userMsg from "./cmps/user-msg.cmp.js"
 
 const options = {
   template: `

@@ -1,11 +1,12 @@
 import longText from '../cmps/long-text.cmp.js'
+import { bookService } from '../services/book-service.js'
 import { eventBus } from '../services/eventBus-service.js'
 
+
 export default {
-  props: ["book"],
   template: `
-      <section class="book-details app-main">
-          <button class="close-modal" @click="$emit('close')">Close</button>
+      <section v-if="book" class="book-details app-main">
+          <button class="close-modal" @click="closeDetails">Close</button>
           <h1>{{book.title}}</h1>
           <h2>Subtitle:{{book.subtitle}}</h2>
           <long-text :text="book.description"></long-text>
@@ -17,16 +18,44 @@ export default {
           <p>Language: {{book.language}}</p>
           <img :src="bookImgUrl">
           <img v-if="book.listPrice.isOnSale" class="sale" src="img/sale-tag.png">
-          <button @click="callBus">Call the Bus</button>
+          <!-- <button @click="callBus">Call the Bus</button> -->
+          <div class="reviews">
+            <h3>Book reviews</h3>
+            <form>
+              <label>Full name
+              <input type="text" placeholder="Books Reader">
+              </label>
+              <label>Read at
+              <input type="date" value="2022-06-28">
+              </label>
+              <label>Rate
+                <select>
+                <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                 <option value="4">4</option>
+                 <option value="5">5</option>
+                </select>
+              </label>
+              <label>Tell us more
+              <input type="text">
+              </label>
+              <button @click="callBus" class="submit-btn" @click="submit">Submit</button>
+            </form>
+          </div>
       </section>
   `,
   data() {
-    return {};
+    return {
+      book: null
+    };
   },
   methods: {
-    callBus(){
-      console.log('testing');
-      eventBus.emit('show-msg', { txt: 'Saved/Update successfully', type: 'success' });
+    callBus() {
+      eventBus.emit('show-msg', { txt: 'Rated successfully', type: 'success' });
+    },
+    closeDetails() {
+      location.assign("http://127.0.0.1:5501/index.html#/book")
     }
   },
   computed: {
@@ -50,13 +79,17 @@ export default {
       else if (diff < 1) return ' New!'
     },
     priceClass() {
-			const price = this.book.listPrice.amount
-			if (price > 150) return 'red'
-			else if (price < 20) return 'green'
-		},
+      const price = this.book.listPrice.amount
+      if (price > 150) return 'red'
+      else if (price < 20) return 'green'
+    },
+  },
+  created() {
+    const id = this.$route.params.bookId
+    bookService.get(id).then(book => this.book = book)
   },
   components: {
-		longText,
+    longText,
     eventBus,
-	},
+  },
 }

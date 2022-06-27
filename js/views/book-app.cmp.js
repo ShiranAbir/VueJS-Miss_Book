@@ -1,19 +1,19 @@
-import { utilService } from "../services/util-service.js";
-import bookList from "../cmps/book-list.cmp.js";
-import bookDetails from "./book-details.cmp.js";
-import bookFilter from "../cmps/book-filter.cmp.js";
+import { utilService } from "../services/util-service.js"
+import bookList from "../cmps/book-list.cmp.js"
+import bookDetails from "./book-details.cmp.js"
+import bookFilter from "../cmps/book-filter.cmp.js"
+import { bookService } from '../services/book-service.js'
 
 export default {
   props: ["book"],
   template: `
     <book-filter @filtered="filterBook"></book-filter>
-    <book-list v-if="!selectedBook" :books="booksToShow" @selected="selectBook"></book-list>
-    <book-details v-if="selectedBook" @close="selectedBook = null" :book="selectedBook"></book-details>
+    <book-list :books="booksToShow"></book-list>
+    <book-details></book-details>
 `,
   data() {
     return {
       books: utilService.gBooks,
-      selectedBook: null,
       filterBy: {
         byName: null,
         fromPrice: null,
@@ -24,15 +24,12 @@ export default {
   components: {
     bookList,
     bookDetails,
-    bookFilter
+    bookFilter,
   },
   methods: {
     filterBook(filterBy) {
       this.filterBy = filterBy;
     },
-    selectBook(book) {
-      this.selectedBook = book;
-    }
   },
   computed: {
     booksToShow() {
@@ -49,4 +46,7 @@ export default {
       return books
     },
   },
+  created() {
+    bookService.query().then(books => this.books = books)
+},
 }
