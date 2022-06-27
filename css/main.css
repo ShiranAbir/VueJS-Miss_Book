@@ -25,8 +25,8 @@ li{
     padding:10px;
     margin:5px;
     background-color:lightblue;
-    width: 150px;
-    height: 150px;
+    width: 250px;
+    height: 250px;
     text-align: center;
     cursor: pointer;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -46,7 +46,8 @@ li{
 
 .book-details{
     border: 2px solid rgb(13, 13, 13);
-    position: relative;;
+    position: relative;
+    color: rgb(13, 13, 13);
 }
 
 .book-details img{
@@ -73,7 +74,21 @@ li{
 }
 
 .close-modal{
-    position: fixed;
+    display: flex;
     top:190px;
     right: 10px;
+}
+
+.book-pre{
+    position: relative;
+}
+
+.book-pre img{
+    width: 100px;
+}
+
+.book-pre .sale{
+    position: absolute;
+    right:75px ;
+    width: 50px;
 }
